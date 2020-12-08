@@ -1,17 +1,14 @@
 // const sqlite3 = require('sqlite3').verbose();
-const db = require('./db/database');
-const inputCheck = require('./utils/inputCheck');
-const express = require('express');
-const PORT = process.env.PORT || 3001;
-const app = express();
-const apiRoutes = require('./routes/apiRoutes');
+// const inputCheck = require('./utils/inputCheck');
+// const express = require('express');
+// const PORT = process.env.PORT || 3001;
+// const app = express();
 
-app.use('/api', apiRoutes);
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+// // Express middleware
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
 
-// Connect to database
+// // Connect to database
 // const db = new sqlite3.Database('./db/election.db', err => {
 //     if (err) {
 //         return console.error(err.message);
@@ -20,7 +17,7 @@ app.use(express.json());
 //     console.log('Connected to the election database.');
 // });
 
-// Get all candidates
+// // Get all candidates
 // app.get('/api/candidates', (req, res) => {
 //     const sql = `SELECT candidates.*, parties.name 
 //              AS party_name 
@@ -174,26 +171,26 @@ app.use(express.json());
 //         });
 //     });
 // });
-// // Create a candidate
-// const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connected) 
-//               VALUES (?,?,?,?)`;
-// const params = [1, 'Ronald', 'Firbank', 1];
-// // ES5 function, not arrow function, to use this
-// db.run(sql, params, function (err, result) {
-//     if (err) {
-//         console.log(err);
-//     }
-//     console.log(result, this.lastID);
+// // // Create a candidate
+// // const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connected) 
+// //               VALUES (?,?,?,?)`;
+// // const params = [1, 'Ronald', 'Firbank', 1];
+// // // ES5 function, not arrow function, to use this
+// // db.run(sql, params, function (err, result) {
+// //     if (err) {
+// //         console.log(err);
+// //     }
+// //     console.log(result, this.lastID);
+// // });
+
+// // Default response for any other request(Not Found) Catch all
+// app.use((req, res) => {
+//     res.status(404).end();
 // });
 
-// Default response for any other request(Not Found) Catch all
-app.use((req, res) => {
-    res.status(404).end();
-});
-
-// Start server after DB connection
-db.on('open', () => {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
-});
+// // Start server after DB connection
+// db.on('open', () => {
+//     app.listen(PORT, () => {
+//         console.log(`Server running on port ${PORT}`);
+//     });
+// });
