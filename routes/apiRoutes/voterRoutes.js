@@ -37,16 +37,18 @@ router.get('/voter/:id', (req, res) => {
     });
 });
 
+// Create a voter
 router.post('/voter', ({ body }, res) => {
+    // Data validation 
     const errors = inputCheck(body, 'first_name', 'last_name', 'email');
-
     if (errors) {
         res.status(400).json({ error: errors });
         return;
     }
+
     const sql = `INSERT INTO voters (first_name, last_name, email) VALUES (?,?,?)`;
     const params = [body.first_name, body.last_name, body.email];
-
+    // use ES5 function, not arrow to use this 
     db.run(sql, params, function (err, data) {
         if (err) {
             res.status(400).json({ error: err.message });
@@ -61,19 +63,17 @@ router.post('/voter', ({ body }, res) => {
     });
 });
 
+// Update a voter's email
 router.put('/voter/:id', (req, res) => {
-    // Data validation
     const errors = inputCheck(req.body, 'email');
     if (errors) {
         res.status(400).json({ error: errors });
         return;
     }
 
-    // Prepare statement
     const sql = `UPDATE voters SET email = ? WHERE id = ?`;
     const params = [req.body.email, req.params.id];
-
-    // Execute
+    // use ES5 function, not arrow to use this 
     db.run(sql, params, function (err, data) {
         if (err) {
             res.status(400).json({ error: err.message });
